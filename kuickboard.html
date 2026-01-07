@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 
+    Kuickboard
+    Version: 1.0.0
+    Created by Kapil Zad
+    07-JAN-2026
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuickboard</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        canvas {
+            display: block;
+            background-color: #ffffff;
+            cursor: crosshair;
+        }
+
+        #status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 28px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 13px;
+            color: #495057;
+            -webkit-user-select: none;
+            user-select: none;
+            z-index: 100;
+            white-space: nowrap;
+            font-family: monospace;            
+        }
+
+        .stat-group {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .stat-label { color: #333; margin-right: 5px; }
+        #mode-indicator { color: #333; text-transform: uppercase; }
+        #color-indicator { color: #333; text-transform: uppercase; border-bottom: 2px solid; padding-bottom: 0px; }
+
+        .shortcuts {
+            margin-left: auto;
+            color: #adb5bd;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 11px;
+            margin-right: 32px;
+        }
+
+        .shortcuts .status-item,.status-about { border-left: 1px solid #ddd; padding-left: 10px; }
+        .shortcuts .status-item:first-child,.status-item:first-child { border: none; } 
+        
+        .key { 
+            color: #6c757d;
+            background: #e9ecef;
+            padding: 2px 4px;
+            margin: 0;
+            border-radius: 3px;
+            font-size: 11px;
+            font-family: monospace;
+            display: inline-flex;
+         }
+
+        /* Base style for each status item that needs a tooltip */
+        .status-item, .status-about {
+            position: relative;
+            cursor: help;
+            font-size: 11px;
+        }
+
+        /* The Tooltip Box */
+        .status-item::after {
+            content: attr(data-tooltip); /* Pulls text from the HTML attribute */
+            position: absolute;
+            bottom: 150%; /* Position above the bar */
+            right: 0;
+            background: #333;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            transform: translateY(5px);
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .status-about::after {
+            content: attr(data-tooltip); /* Pulls text from the HTML attribute */
+            position: absolute;
+            bottom: 150%; /* Position above the bar */
+            right: 0;
+            background: #333;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            transform: translateY(5px);
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+            white-space: pre-wrap;
+            width: 320px;
+
+            text-transform: none;
+        }
+
+        /* Show tooltip on hover */
+        .status-item:hover::after,
+        .status-item:hover::before,
+        .status-about:hover::after,
+        .status-about:hover::before {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="whiteboard"></canvas>
+    
+    <div id="status-bar">
+        <div class="stat-group">
+            <div id="color-indicator" style="color: black; border-color: black;" class="status-item" data-tooltip="Colour">BLACK</div>
+        </div>
+        <div class="stat-group">
+            <div id="mode-indicator" class="status-item" data-tooltip="Mode">RECTANGLE</div>
+        </div>
+
+        <div class="shortcuts">
+            <div class="status-item" data-tooltip="Toggle the mode to RECTANGLE or PEN."><span class="key">ALT</span> Rect/Pen</div>
+            <div class="status-item" data-tooltip="Change mode to CIRCLE."><span class="key">CTRL+O</span> Circle</div>
+            <div class="status-item" data-tooltip="Change mode to LINE."><span class="key">CTRL+L</span> Line</div>
+            <div class="status-item" data-tooltip="Toggle colour."><span class="key">CTRL+K</span> Kolour</div>
+            <div class="status-item" data-tooltip="Hover over a rectangle or circle and press CTRL+Q to clear its text. The shape must be on top."><span class="key">CTRL+Q</span> Qlear Text</div>
+            <div class="status-item" data-tooltip="Clear all."><span class="key">CTRL+R</span> Reset</div>
+            <div class="status-item" data-tooltip="Undo last action."><span class="key">CTRL+Z</span> Undo</div>
+            <div class="status-about" data-tooltip="About Kuickboard
+
+Version 1.0.0
+
+▣ Move the mouse pointer to the desired spot and start typing to add text there.
+▣ Hover over a rectangle or circle and start typing to add a label.
+▣ Manually drawing a rectangle or circle in PEN mode automatically converts it into the corresponding shape.
+
+Made with ❤️ in India by Kapil Zad"><span class="key" style="border-radius: 10px;">i</span></div>
+        </div>
+
+    </div>
+
+    <script src="kuickboard.js"></script>
+</body>
+</html>
