@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuickboard - Simple Whiteboard Extension</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --border: #dee2e6;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffffff, var(--light));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { width: 100px; height: 100px; margin-bottom: 20px; }
+
+        h1 { font-size: 3rem; margin: 0; color: var(--dark); }
+
+        .tagline { font-size: 1.25rem; color: #6c757d; margin-bottom: 30px; }
+
+        .btn {
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn.primary { background: var(--primary); color: white; }
+        .btn.secondary { border: 1px solid var(--primary); color: var(--primary); }
+
+        .features { padding: 60px 0; background: white; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+
+        .shortcuts-guide { padding: 60px 0; background: var(--light); }
+
+        .shortcut-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+
+        .shortcut-table td { padding: 12px; border-bottom: 1px solid var(--border); }
+
+        .key {
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--border); }
+
+        footer a { color: var(--primary); text-decoration: none; font-weight: bold; }
+        footer a:hover { text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <img src="icon.png" alt="Kuickboard Logo" class="logo">
+            <h1>Kuickboard</h1>
+            <p class="tagline">A simple whiteboard for quick diagrams.</p>
+            <div class="actions">
+                <a href="https://github.com/kapzad/kuickboard" class="btn primary">View on GitHub</a>
+                <a href="https://chromewebstore.google.com/" class="btn secondary">Add to Chrome</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container">
+            <h2>Why Kuickboard?</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Shape Recognition</h3>
+                    <p>Draw rough rectangles or circles with the pen tool and watch them snap into perfect geometry instantly.</p>
+                </div>
+                <div class="card">
+                    <h3>Persistent Storage</h3>
+                    <p>Never lose your work. Everything is saved locally in your browser using <code>localStorage</code>.</p>
+                </div>
+                <div class="card">
+                    <h3>Speed Focused</h3>
+                    <p>Designed for power users with keyboard shortcuts for colors, modes, and instant text clearing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="shortcuts-guide">
+        <div class="container">
+            <h2>Keyboard Shortcuts</h2>
+            <table class="shortcut-table">
+                <tr><td><span class="key">ALT</span></td><td>Toggle RECTANGLE / PEN mode</td></tr>
+                <tr><td><span class="key">CTRL + O</span></td><td>Change mode to CIRCLE</td></tr>
+                <tr><td><span class="key">CTRL + L</span></td><td>Change mode to LINE</td></tr>
+                <tr><td><span class="key">CTRL + K</span></td><td>Toggle colors</td></tr>
+                <tr><td><span class="key">CTRL + Q</span></td><td>Clear text inside hovered shape</td></tr>
+                <tr><td><span class="key">CTRL + R</span></td><td>Reset canvas</td></tr>
+                <tr><td><span class="key">CTRL + Z</span></td><td>Undo last action</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Created with ❤️ in India by <a href="https://github.com/kapzad">kapzad</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
